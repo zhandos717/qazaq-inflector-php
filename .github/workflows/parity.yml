@@ -1,0 +1,31 @@
+name: Python parity
+
+# Сверяет PHP-порт с последней версией qazaq_inflector на PyPI: если грамматику поменяли
+# только в Python, этот прогон упадёт
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: mbstring
+          coverage: none
+      - run: pip install --upgrade qazaq_inflector
+      - run: python tests/fixtures/generate.py
+      - run: composer update --prefer-dist --no-progress
+      - run: vendor/bin/phpunit --filter PythonReferenceTest
+      - name: Committed fixture is up to date
+        run: git diff --exit-code tests/fixtures/python_reference.json

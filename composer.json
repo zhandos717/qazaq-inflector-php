@@ -1,0 +1,32 @@
+{
+    "name": "zhandos717/qazaq-inflector",
+    "description": "Declension of Kazakh names, full names and pronouns: 7 cases, possessive forms, predicate endings",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["kazakh", "qazaq", "inflection", "declension", "grammar", "names", "laravel"],
+    "homepage": "https://github.com/zhandos717/qazaq-inflector-php",
+    "authors": [
+        {"name": "Zhandos Zhandarbekov", "email": "zhandos.zhandarbekov@gmail.com"}
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5 || ^11.0",
+        "phpstan/phpstan": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {"Zhandos\\QazaqInflector\\": "src/"}
+    },
+    "autoload-dev": {
+        "psr-4": {"Zhandos\\QazaqInflector\\Tests\\": "tests/"}
+    },
+    "scripts": {
+        "test": "phpunit",
+        "analyse": "phpstan analyse"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
